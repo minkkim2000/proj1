@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Search Results</title
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="searchresultsstyle.css">
+    <style type="text/css">
+    	#searchRefinement {
+    font-weight: bold;
+    margin-bottom: 10px;
+    padding: 12px 0;
+    width: 100%;
+}
+styles.min.css:1
+#searchRefinement, .dropdown {
+    list-style: none;
+    float: left;
+}
+styles.min.css:1
+#searchRefinement {
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+    margin: 3px 0;
+}
+styles.min.css:1
+p, ol, ul, li, .optionGroup label {
+    font-size: 14px;
+}
+    	
+    </style>
+</head>
+
+<body>
+<!-- nav bar -->
+<nav class="navbar navbar-expand-md navbar-light fixed-top" style="background-color: rgba(255, 40, 22, 0.7);">
+    <a class="navbar-brand" href="#"><img class="logo" src="images/logo.png" width="120px"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- not sure if we would actually need this.. but just in case -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active"> 
+                <a class="nav-link" href="#"><h4>Home </h4><span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#"><h4>Link</h4></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#"><h4>Disabled</h4></a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" id="navsearchbar">
+            <input class="form-control mr-sm-2" id="mini-searchbar" type="text" placeholder="What's cookin?" aria-label="Search">
+            <button class="btn btn-danger my-2 my-sm-0" id="mini-searchbtn" type="submit">Search</button>
+        </form>
+    </div>
+        <!-- LOGIN BUTTON -->
+        <button class="btn btn-warning" id="login-button" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+        <div id="id01" class="modal">
+            <form class="modal-content animate" action="/action_page.php">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <div class="container">
+                    <label><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" name="uname" required>
+                    <label><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" required>
+                    <input type="checkbox" checked="checked"> Remember me
+                    <div class="clearfix">
+                        <button type="submit" class="loginbtn">Login</button>
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                    </div>
+                </div>
+            </form>
+    </div>
+
+    <!-- SIGN UP BUTTON -->
+    <button class="btn btn-warning" id="signup-button" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Sign Up</button>
+    <div id="id02" class="modal2">
+        <form class="modal-content animate" action="/action_page.php">
+            <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">×</span>
+            <div class="container">
+                <label><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="email" required>
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+                <label><b>Repeat Password</b></label>
+                <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+                <input type="checkbox" checked="checked"> Remember me
+                <div class="clearfix">
+                    <button type="submit" class="signupbtn">Sign Up</button>
+                    <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+</nav>
+    <!-- nav bar end -->
+
+<!-- search results display -->
+<div class="row content-display">
+    <div class="col-lg-3" id="search-filters">
+			<div id="accordion" class="panel panel-primary behclick-panel">
+				<div class="panel-heading">
+					<h4 class="panel-title">Search for...</h4>
+				</div>
+				<div class="panel-body" >
+					 <ul id="searchRefinement" class="optionGroup">
+            <li>
+                <div class="search-filter">
+                    <label>Cuisine:</label>
+                    <div id="search-cuisine" class="chosenValue">Any</div>
+                    <div class="triangle"></div>
+                </div>
+                
+                    <li style="min-width:180px;">
+                        <div class="radio">
+                            <input id="cuisine-Any" type="radio" name="cuisine" value="Any" checked="checked" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Any">Any</label>
+                            <br>
+                            <input id="cuisine-African" type="radio" name="cuisine" value="African" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-African">African</label>
+                            <br>
+                            <input id="cuisine-American" type="radio" name="cuisine" value="American" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-American">American</label>
+                            <br>
+                            <input id="cuisine-British" type="radio" name="cuisine" value="British" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-British">British</label>
+                            <br>
+                            <input id="cuisine-Cajun" type="radio" name="cuisine" value="Cajun" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Cajun">Cajun</label>
+                            <br>
+                            <input id="cuisine-Caribbean" type="radio" name="cuisine" value="Caribbean" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Caribbean">Caribbean</label>
+                            <br>
+                            <input id="cuisine-Chinese" type="radio" name="cuisine" value="Chinese" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Chinese">Chinese</label>
+                            <br>
+                            <input id="cuisine-Eastern European" type="radio" name="cuisine" value="Eastern European" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Eastern European">Eastern European</label>
+                            <br>
+                            <input id="cuisine-French" type="radio" name="cuisine" value="French" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-French">French</label>
+                            <br>
+                            <input id="cuisine-German" type="radio" name="cuisine" value="German" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-German">German</label>
+                            <br>
+                            <input id="cuisine-Greek" type="radio" name="cuisine" value="Greek" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Greek">Greek</label>
+                            <br>
+                            <input id="cuisine-Indian" type="radio" name="cuisine" value="Indian" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Indian">Indian</label>
+                            <br>
+                            <input id="cuisine-Irish" type="radio" name="cuisine" value="Irish" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Irish">Irish</label>
+                            <br>
+                            <input id="cuisine-Italian" type="radio" name="cuisine" value="Italian" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Italian">Italian</label>
+                            <br>
+                            <input id="cuisine-Jewish" type="radio" name="cuisine" value="Jewish" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Jewish">Jewish</label>
+                            <br>
+                            <input id="cuisine-Japanese" type="radio" name="cuisine" value="Japanese" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Japanese">Japanese</label>
+                            <br>
+                            <input id="cuisine-Korean" type="radio" name="cuisine" value="Korean" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Korean">Korean</label>
+                            <br>
+                            <input id="cuisine-Latin American" type="radio" name="cuisine" value="Latin American" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Latin American">Latin American</label>
+                            <br>
+                            <input id="cuisine-Mexican" type="radio" name="cuisine" value="Mexican" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Mexican">Mexican</label>
+                            <br>
+                            <input id="cuisine-Middle Eastern" type="radio" name="cuisine" value="Middle Eastern" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Middle Eastern">Middle Eastern</label>
+                            <br>
+                            <input id="cuisine-Nordic" type="radio" name="cuisine" value="Nordic" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Nordic">Nordic</label>
+                            <br>
+                            <input id="cuisine-Southern" type="radio" name="cuisine" value="Southern" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Southern">Southern</label>
+                            <br>
+                            <input id="cuisine-Spanish" type="radio" name="cuisine" value="Spanish" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Spanish">Spanish</label>
+                            <br>
+                            <input id="cuisine-Thai" type="radio" name="cuisine" value="Thai" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Thai">Thai</label>
+                            <br>
+                            <input id="cuisine-Vietnamese" type="radio" name="cuisine" value="Vietnamese" onclick="chooseCuisine(this.value)">
+                            <label for="cuisine-Vietnamese">Vietnamese</label>
+                            <br>
+                        </div>
+                    </li>
+                
+            </li>
+            <li>
+                <div class="search-filter">
+                    <label>Diet:</label>
+                    <div id="search-diet" class="chosenValue">Any</div>
+                    <div class="triangle"></div>
+                </div>
+                
+                    <li style="width:185px;">
+                        <div class="radio">
+                            <input id="diet-Any" type="radio" name="diet" value="Any" checked="checked" onclick="chooseDiet(this.value)">
+                            <label for="diet-Any">Any</label>
+                            <br>
+                            <input id="diet-Lacto Vegetarian" type="radio" name="diet" value="Lacto Vegetarian" onclick="chooseDiet(this.value)">
+                            <label for="diet-Lacto Vegetarian">Lacto Vegetarian</label>
+                            <br>
+                            <input id="diet-Ovo Vegetarian" type="radio" name="diet" value="Ovo Vegetarian" onclick="chooseDiet(this.value)">
+                            <label for="diet-Ovo Vegetarian">Ovo Vegetarian</label>
+                            <br>
+                            <input id="diet-Paleo" type="radio" name="diet" value="Paleo" onclick="chooseDiet(this.value)">
+                            <label for="diet-Paleo">Paleo</label>
+                            <br>
+                            <input id="diet-Pescetarian" type="radio" name="diet" value="Pescetarian" onclick="chooseDiet(this.value)">
+                            <label for="diet-Pescetarian">Pescetarian</label>
+                            <br>
+                            <input id="diet-Primal" type="radio" name="diet" value="Primal" onclick="chooseDiet(this.value)">
+                            <label for="diet-Primal">Primal</label>
+                            <br>
+                            <input id="diet-Vegan" type="radio" name="diet" value="Vegan" onclick="chooseDiet(this.value)">
+                            <label for="diet-Vegan">Vegan</label>
+                            <br>
+                            <input id="diet-Vegetarian" type="radio" name="diet" value="Vegetarian" onclick="chooseDiet(this.value)">
+                            <label for="diet-Vegetarian">Vegetarian</label>
+                            <br>
+                            <input id="diet-Ketogenic" type="radio" name="diet" value="Ketogenic" onclick="chooseDiet(this.value)">
+                            <label for="diet-Ketogenic">Ketogenic</label>
+                            <br>
+                            <input id="diet-Whole 30" type="radio" name="diet" value="Whole 30" onclick="chooseDiet(this.value)">
+                            <label for="diet-Whole 30">Whole 30</label>
+                            <br>
+                        </div>
+                    </li>
+                
+            </li>
+            <li>
+                <div class="search-filter">
+                    <label>Intolerances:</label>
+                    <div id="search-intolerances" class="chosenValue">None</div>
+                    <div class="triangle"></div>
+                </div>
+                
+                    <li style="width:185px;">
+                        <div class="checkbox">
+                            <input id="intolerance-Dairy" type="checkbox" name="intolerances" value="Dairy" onclick="chooseIntolerances()">
+                            <label for="intolerance-Dairy">Dairy</label>
+                            <br>
+                            <input id="intolerance-Egg" type="checkbox" name="intolerances" value="Egg" onclick="chooseIntolerances()">
+                            <label for="intolerance-Egg">Egg</label>
+                            <br>
+                            <input id="intolerance-Gluten" type="checkbox" name="intolerances" value="Gluten" onclick="chooseIntolerances()">
+                            <label for="intolerance-Gluten">Gluten</label>
+                            <br>
+                            <input id="intolerance-Grains" type="checkbox" name="intolerances" value="Grains" onclick="chooseIntolerances()">
+                            <label for="intolerance-Grains">Grains</label>
+                            <br>
+                            <input id="intolerance-Peanut" type="checkbox" name="intolerances" value="Peanut" onclick="chooseIntolerances()">
+                            <label for="intolerance-Peanut">Peanut</label>
+                            <br>
+                            <input id="intolerance-Seafood" type="checkbox" name="intolerances" value="Seafood" onclick="chooseIntolerances()">
+                            <label for="intolerance-Seafood">Seafood</label>
+                            <br>
+                            <input id="intolerance-Sesame" type="checkbox" name="intolerances" value="Sesame" onclick="chooseIntolerances()">
+                            <label for="intolerance-Sesame">Sesame</label>
+                            <br>
+                            <input id="intolerance-Shellfish" type="checkbox" name="intolerances" value="Shellfish" onclick="chooseIntolerances()">
+                            <label for="intolerance-Shellfish">Shellfish</label>
+                            <br>
+                            <input id="intolerance-Soy" type="checkbox" name="intolerances" value="Soy" onclick="chooseIntolerances()">
+                            <label for="intolerance-Soy">Soy</label>
+                            <br>
+                            <input id="intolerance-Sulfite" type="checkbox" name="intolerances" value="Sulfite" onclick="chooseIntolerances()">
+                            <label for="intolerance-Sulfite">Sulfite</label>
+                            <br>
+                            <input id="intolerance-Tree Nut" type="checkbox" name="intolerances" value="Tree Nut" onclick="chooseIntolerances()">
+                            <label for="intolerance-Tree Nut">Tree Nut</label>
+                            <br>
+                            <input id="intolerance-Wheat" type="checkbox" name="intolerances" value="Wheat" onclick="chooseIntolerances()">
+                            <label for="intolerance-Wheat">Wheat</label>
+                            <br>
+                        </div>
+                    </li>
+                
+            </li>
+            <li>
+                <div class="search-filter">
+                    <label>Type:</label>
+                    <div id="search-type" class="chosenValue">Any</div>
+                    <div class="triangle"></div>
+                </div>
+                
+                    <li style="width:230px;">
+                        <div class="radio">
+                            <input id="type-Any" type="radio" name="type" value="Any" checked="checked" onclick="chooseType(this.value)">
+                            <label for="type-Any">Any</label>
+                            <br>
+                            <input id="type-Appetizer / Snack" type="radio" name="type" value="Appetizer / Snack" onclick="chooseType(this.value)">
+                            <label for="type-Appetizer / Snack">Appetizer / Snack</label>
+                            <br>
+                            <input id="type-Batter" type="radio" name="type" value="Batter" onclick="chooseType(this.value)">
+                            <label for="type-Batter">Batter</label>
+                            <br>
+                            <input id="type-Beverage" type="radio" name="type" value="Beverage" onclick="chooseType(this.value)">
+                            <label for="type-Beverage">Beverage</label>
+                            <br>
+                            <input id="type-Bread" type="radio" name="type" value="Bread" onclick="chooseType(this.value)">
+                            <label for="type-Bread">Bread</label>
+                            <br>
+                            <input id="type-Breakfast / Brunch" type="radio" name="type" value="Breakfast / Brunch" onclick="chooseType(this.value)">
+                            <label for="type-Breakfast / Brunch">Breakfast / Brunch</label>
+                            <br>
+                            <input id="type-Crust" type="radio" name="type" value="Crust" onclick="chooseType(this.value)">
+                            <label for="type-Crust">Crust</label>
+                            <br>
+                            <input id="type-Dessert" type="radio" name="type" value="Dessert" onclick="chooseType(this.value)">
+                            <label for="type-Dessert">Dessert</label>
+                            <br>
+                            <input id="type-Drink / Cocktail" type="radio" name="type" value="Drink / Cocktail" onclick="chooseType(this.value)">
+                            <label for="type-Drink / Cocktail">Drink / Cocktail</label>
+                            <br>
+                            <input id="type-Frosting / Icing" type="radio" name="type" value="Frosting / Icing" onclick="chooseType(this.value)">
+                            <label for="type-Frosting / Icing">Frosting / Icing</label>
+                            <br>
+                            <input id="type-Main Course" type="radio" name="type" value="Main Course" onclick="chooseType(this.value)">
+                            <label for="type-Main Course">Main Course</label>
+                            <br>
+                            <input id="type-Salad" type="radio" name="type" value="Salad" onclick="chooseType(this.value)">
+                            <label for="type-Salad">Salad</label>
+                            <br>
+                            <input id="type-Sauce" type="radio" name="type" value="Sauce" onclick="chooseType(this.value)">
+                            <label for="type-Sauce">Sauce</label>
+                            <br>
+                            <input id="type-Spread" type="radio" name="type" value="Spread" onclick="chooseType(this.value)">
+                            <label for="type-Spread">Spread</label>
+                            <br>
+                            <input id="type-Seasoning / Marinade" type="radio" name="type" value="Seasoning / Marinade" onclick="chooseType(this.value)">
+                            <label for="type-Seasoning / Marinade">Seasoning / Marinade</label>
+                            <br>
+                            <input id="type-Side Dish" type="radio" name="type" value="Side Dish" onclick="chooseType(this.value)">
+                            <label for="type-Side Dish">Side Dish</label>
+                            <br>
+                            <input id="type-Soup" type="radio" name="type" value="Soup" onclick="chooseType(this.value)">
+                            <label for="type-Soup">Soup</label>
+                            <br>
+                        </div>
+                    </li>
+                
+            </li>
+            <li>
+                <div class="search-filter">
+                    <label>Occasion:</label>
+                    <div id="search-occasion" class="chosenValue">Any</div>
+                    <div class="triangle"></div>
+                </div>
+                
+                    <li style="width:230px;">
+                        <div class="radio">
+                            <input id="occasion-Any" type="radio" name="occasion" value="Any" checked="checked" onclick="chooseOccasion(this.value)">
+                            <label for="occasion-Any">Any</label>
+                            <br>
+                            <input id="occasion-4th of July" type="radio" name="occasion" value="4th of July" onclick="chooseOccasion(this.value)">
+                            <label for="occasion-4th of July">4th of July</label>
+                            <br>
+                            <input id="occasion-Birthday" type="radio" name="occasion" value="Birthday" onclick="chooseOccasion(this.value)">
+                            <label for="occasion-Birthday">Birthday</label>
+                            <br>
+                            <input id="occasion-Christmas" type="radio" name="occasion" value="Christmas" onclick="chooseOccasion(this.value)">
+                            <label for="occasion-Christmas">Christmas</label>
+                            <br>
+                            <input id="occasion-Easter" type="radio" name="occasion" value="Easter" onclick="chooseOccasion(this.value)">
+                            <label for="occasion-Easter">Easter</label>
+                            <br>
+                            <input id="occasion-Fall" type="radio" name="occasion" value="Fall" onclick="chooseOccasion(this.value)">
+                            <label for="occasion-Fall">Fall</label>
+                            <br>
+                            <input id="occasion-Father's Day" type="radio" name="occasion" value="Father's Day" onclick="chooseOccasion(this.value)">
+                            <label for="occasion-Father's Day">Father's Day</label>
+                            <br>
+                            <input id="occasion-Halloween" type="radio" name="occasion" value="Halloween" onclick="chooseOccasion(this.value)">
+                            <label for="occasion-Halloween">Halloween</label>
+                            <br>
+                            <input id="occasion-Hanukkah" type="radio" name="occasion" value="Hanukkah" onclick="chooseOccasion(this.value)">
+                            <label for="occasion-Hanukkah">Hanukkah</label>
+                            <br>
+                            <input id="occasion-Mother's Day" type="radio" name="occasion" value="Mother's Day" onclick="chooseOccasion(this.value)">
+                            <label for="occasion-Mother's Day">Mother's Day</label>
+                            <br>
+                            <input id="occasion-New Year's Eve" type="radio" name="occasion" value="New Year's Eve" onclick="chooseOccasion(this.value)">
+                            <label for="occasion-New Year's Eve">New Year's Eve</label>
+                            <br>
+                            <input id="occasion-Spring" type="radio" name="occasion" value="Spring" onclick="chooseOccasion(this.value)">
+                            <label for="occasion-Spring">Spring</label>
+                            <br>
+                            <input id="occasion-Super Bowl" type="radio" name="occasion" value="Super Bowl" onclick="chooseOccasion(this.value)">
+                            <label for="occasion-Super Bowl">Super Bowl</label>
+                            <br>
+                            <input id="occasion-Summer" type="radio" name="occasion" value="Summer" onclick="chooseOccasion(this.value)">
+                            <label for="occasion-Summer">Summer</label>
+                            <br>
+                            <input id="occasion-Thanksgiving" type="radio" name="occasion" value="Thanksgiving" onclick="chooseOccasion(this.value)">
+                            <label for="occasion-Thanksgiving">Thanksgiving</label>
+                            <br>
+                            <input id="occasion-Valentine's Day" type="radio" name="occasion" value="Valentine's Day" onclick="chooseOccasion(this.value)">
+                            <label for="occasion-Valentine's Day">Valentine's Day</label>
+                            <br>
+                            <input id="occasion-Wedding" type="radio" name="occasion" value="Wedding" onclick="chooseOccasion(this.value)">
+                            <label for="occasion-Wedding">Wedding</label>
+                            <br>
+                            <input id="occasion-Winter" type="radio" name="occasion" value="Winter" onclick="chooseOccasion(this.value)">
+                            <label for="occasion-Winter">Winter</label>
+                            <br>
+                        </div>
+                    </li>
+                
+            </li>
+
+					
+				</div>
+			</div>
+		</div>
+
+
+
+
+
+
+    </div>
+
+    <div class="col-lg-9"  id="search-results-content">
+		<div class="row" id="keyword=dispaly">
+			lskjlskj
+		</div>
+
+		<div class="row" id="search-results-grid">
+			;lakdsjf;
+		</div>
+
+
+
+    </div>
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript">
+	        function toggleChevron(e) {
+		$(e.target)
+				.prev('.panel-heading')
+				.find("i.indicator")
+				.toggleClass('fa-caret-down fa-caret-right');
+	}
+	$('#accordion').on('hidden.bs.collapse', toggleChevron);
+	$('#accordion').on('shown.bs.collapse', toggleChevron);
+
+
+</script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+</body>
+
+</html>

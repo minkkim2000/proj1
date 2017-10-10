@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Search Results</title
+    <link rel="stylesheet" type="text/css" href="reset.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="searchresultsstyle.css">
+</head>
+
+<body>
+<!-- nav bar -->
+<nav class="navbar navbar-expand-md navbar-light fixed-top">
+    <a class="navbar-brand" href="#"><img class="logo" src="images/logo.png" width="120px"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- not sure if we would actually need this.. but just in case -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active"> 
+                <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">About</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0" id="navsearchbar">
+            <input class="form-control mr-sm-2 form-control-sm" id="mini-searchbar" type="text" placeholder="What's cookin?" aria-label="Search">
+            <button class="btn btn-danger my-2 my-sm-0 btn-sm" id="mini-searchbtn" type="submit">Search</button>
+        </form>
+    </div>
+        <!-- LOGIN BUTTON -->
+        <button class="btn btn-warning btn-sm" id="login-button" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+        <div id="id01" class="modal">
+            <form class="modal-content animate" action="/action_page.php">
+                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                <div class="container">
+                    <label><b>Username</b></label>
+                    <input type="text" placeholder="Enter Username" name="uname" required>
+                    <label><b>Password</b></label>
+                    <input type="password" placeholder="Enter Password" name="psw" required>
+                    <input type="checkbox" checked="checked"> Remember me
+                    <div class="clearfix">
+                        <button type="submit" class="loginbtn">Login</button>
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                    </div>
+                </div>
+            </form>
+    </div>
+
+    <!-- SIGN UP BUTTON -->
+    <button class="btn btn-warning btn-sm" id="signup-button" onclick="document.getElementById('id02').style.display='block'" style="width:auto;">Sign Up</button>
+    <div id="id02" class="modal2">
+        <form class="modal-content animate" action="/action_page.php">
+            <span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">×</span>
+            <div class="container">
+                <label><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="Username" required>
+                <label><b>Email</b></label>
+                <input type="text" placeholder="Enter Email" name="email" required>
+                <label><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" required>
+                <label><b>Repeat Password</b></label>
+                <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+                <input type="checkbox" checked="checked"> Remember me
+                <div class="clearfix">
+                    <button type="submit" class="signupbtn">Sign Up</button>
+                    <button type="button" onclick="document.getElementById('id02').style.display='none'" class="cancelbtn">Cancel</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    </div>
+</nav>
+    <!-- nav bar end -->
+
+<!-- search results display -->
+<div class="row content-display">
+    <div class="col-md-3" id="search-filters">
+			<div id="accordion" class="panel panel-primary behclick-panel">
+				<div class="panel-heading">
+					<h4 class="panel-title">Search for...</h4>
+				</div>
+				<div class="panel-body" >
+					
+
+					<div class="panel-heading " >
+						<h5 class="panel-title">
+							<a data-toggle="collapse" href="#collapse1">
+								<i class="indicator fa fa-caret-down" aria-hidden="true"></i> Cuisine
+							</a>
+						</h5>
+					</div>
+					<div id="collapse1" class="panel-collapse collapse in" >
+						<ul class="list-group">
+							<li class="list-group-item">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" value="">
+										Any
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox" >
+									<label>
+										<input type="checkbox" value="">
+										African
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										American
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										British
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										Cajun
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										Caribbean
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										Chinese
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										Eastern European
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										French
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										German
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										Greek
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										Irish
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										Italian
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										Jewish
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										Japanese
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										Korean
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										Latin American
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										Mexican
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										Middle Eastern
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										Nordic
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										Southern
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										Spanish
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										Thai
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										Vietnamese
+									</label>
+								</div>
+							</li>
+						</ul>
+
+					</div>
+<hr>
+					<div class="panel-heading" >
+						<h5 class="panel-title">
+							<a data-toggle="collapse" href="#collapse3"><i class="indicator fa fa-caret-down" aria-hidden="true"></i> Alergens</a>
+						</h5>
+					</div>
+					<div id="collapse3" class="panel-collapse collapse in">
+						<ul class="list-group">
+							<li class="list-group-item">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" value="">
+										glutton-free
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox" >
+									<label>
+										<input type="checkbox" value="">
+										sugar-free
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										deez nuts
+									</label>
+								</div>
+							</li>
+						</ul>
+					</div>
+<hr>
+					<div class="panel-heading" >
+						<h5 class="panel-title">
+							<a data-toggle="collapse" href="#collapse2"><i class="indicator fa fa-caret-right" aria-hidden="true"></i> Cuisine type</a>
+						</h5>
+					</div>
+					<div id="collapse2" class="panel-collapse collapse">
+						<ul class="list-group">
+							<li class="list-group-item">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" value="">
+										7
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox" >
+									<label>
+										<input type="checkbox" value="">
+										8
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" value="">
+										9
+									</label>
+								</div>
+							</li>
+						</ul>
+					</div>
+<hr>
+					<div class="panel-heading " >
+						<h5 class="panel-title">
+							<a data-toggle="collapse" href="#collapse0">
+								<i class="indicator fa fa-caret-down" aria-hidden="true"></i> Price
+							</a>
+						</h5>
+					</div>
+					<div id="collapse0" class="panel-collapse collapse in" >
+						<ul class="list-group">
+							<li class="list-group-item">
+								<div class="checkbox">
+									<label>
+										<input type="checkbox" value="">
+										0 - 1000$
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox" >
+									<label>
+										<input type="checkbox" value="">
+										1000$ - 2000$
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										2000$ - 6000$
+									</label>
+								</div>
+							</li>
+							<li class="list-group-item">
+								<div class="checkbox"  >
+									<label>
+										<input type="checkbox" value="">
+										More Than 6000$
+									</label>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+
+
+
+
+
+    </div>
+
+    <div class="col-md-9"  id="search-results-content">
+		<div class="row" id="keyword=dispaly">
+			<h3>
+				Keyword Display
+			</h3>
+		</div>
+
+		<div class="row" id="search-results-grid">
+			;lakdsjf;
+		</div>
+
+
+
+    </div>
+</div>
+
+
+
+
+<script type="text/javascript">
+	        function toggleChevron(e) {
+		$(e.target)
+				.prev('.panel-heading')
+				.find("i.indicator")
+				.toggleClass('fa-caret-down fa-caret-right');
+	}
+	$('#accordion').on('hidden.bs.collapse', toggleChevron);
+	$('#accordion').on('shown.bs.collapse', toggleChevron);
+
+
+</script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+</body>
+
+</html>
