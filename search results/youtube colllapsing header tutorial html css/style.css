@@ -1,0 +1,41 @@
+/*search box*/
+
+body{
+	background-color: orange;
+}
+
+.form{
+	padding: 0;
+}
+
+
+.form-search-input{
+	width: 0px;
+	height: 33px;
+	border: 0;
+	outline: 0;
+	font-size: 18px;
+	padding: 0;
+	color: #151515;
+	transition: all 0.5s;
+}
+
+.search-input-open{
+	width: 300px !important;
+	padding:  5px 10px 10px 10px !important;
+	display: initial !important;
+}
+
+.form-search-submit{
+	display: inline-block;
+	vertical-align: middle;
+	width: 55px;
+	height: 43px;
+	border: 0;
+	outline: 0;
+	background-color: #151515;
+	font-size: 21px;
+	color: white;
+	cursor: pointer;
+	text-align: center;
+}
